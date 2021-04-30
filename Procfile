@@ -1,0 +1,1 @@
+web: ./target/debug/equation_api
