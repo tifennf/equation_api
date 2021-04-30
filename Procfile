@@ -1,1 +1,1 @@
-web: ./target/debug/equation_api
+web: ./target/release/equation_api
