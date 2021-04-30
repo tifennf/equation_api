@@ -1,5 +1,7 @@
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 use equation_generator::basic;
+use std::env;
+
 
 #[get("/")]
 async fn hello() -> impl Responder {
@@ -18,12 +20,16 @@ async fn equation() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+
+	let port = env::var("PORT").unwrap_or("3000".to_string());
+	let ip = "0.0.0.0";
+	
     HttpServer::new(|| {
         App::new()
             .service(hello)
             .service(equation)
     })
-    .bind("127.0.0.1:8080")?
+    .bind(format!("{}:{}", ip, port))?
     .run()
     .await
 }
